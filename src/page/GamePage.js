@@ -1,8 +1,8 @@
 import React from "react";
 
 import logoPlayer from "../asset/image/icon/material-person.svg";
-import logoGamepag from "../asset/image/icon/awesome-gamepad.svg";
-import logoCross from "../asset/image/icon/metro-cross.svg";
+// import logoGamepag from "../asset/image/icon/awesome-gamepad.svg";
+// import logoCross from "../asset/image/icon/metro-cross.svg";
 import TimerCircle from "../component/TimerCircle";
 
 export const GamePage = () => {
