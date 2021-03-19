@@ -1,14 +1,14 @@
 import React from "react";
 
 import "./App.scss";
-import { GamePage } from "./page/GamePage";
-// import WelcomePage from "./page/WelcomePage";
+import WelcomePage from "./page/WelcomePage";
+// import { GamePage } from "./page/GamePage";
 
 const App = () => {
   return (
       <div className="App">
-        {/* <WelcomePage /> */}
-        <GamePage />
+        <WelcomePage />
+        {/* <GamePage /> */}
       </div>
   );
 }
