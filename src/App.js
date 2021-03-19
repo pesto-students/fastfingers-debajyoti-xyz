@@ -1,11 +1,15 @@
-import React from 'react';
-import './App.css';
+import React from "react";
 
-function App() {
+import "./App.scss";
+import { GamePage } from "./page/GamePage";
+// import WelcomePage from "./page/WelcomePage";
+
+const App = () => {
   return (
-    <div className="App">
-      <h1>Fast Fingers </h1>
-    </div>
+      <div className="App">
+        {/* <WelcomePage /> */}
+        <GamePage />
+      </div>
   );
 }
 
