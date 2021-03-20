@@ -23,7 +23,7 @@ const WelcomePage = () => {
           <option value={LEVEL_HARD}>HARD</option>
         </select>
       </section>
-      <button>
+      <button className="btn btn-lg">
           <img src={logoPlay} alt="" />
           <span>Start Game</span>
       </button>

@@ -3,16 +3,15 @@ import PropTypes from "prop-types";
 
 const ProgressBar = ({
   progress = 70,
-  text = "02:10",
-  textColor = "#fff",
+  text = "",
   size = 200,
-  strokeWidth = 10,
+  strokeWidth = 8,
   circleOneStroke = "#fff",
   circleTwoStroke = "#ff5155",
   ...svgProps
 }) => {
   const center = size / 2;
-  const radius = size / 2 - strokeWidth / 2;
+  const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
 
   const progressOffset = ((100 - progress) / 100) * circumference;
@@ -26,6 +25,7 @@ const ProgressBar = ({
         cy={center}
         r={radius}
         strokeWidth={strokeWidth}
+        opacity="0.23"
       />
       <circle
         className="progress-circle"
@@ -33,9 +33,11 @@ const ProgressBar = ({
         cx={center}
         cy={center}
         r={radius}
+        transform={`rotate(-90 ${center} ${center})`}
         strokeWidth={strokeWidth}
         strokeDasharray={circumference}
         strokeDashoffset={progressOffset}
+        strokeLinejoin="round"
       />
       <text
         className="progress-circle-text"
@@ -43,7 +45,6 @@ const ProgressBar = ({
         y={center}
         dominantBaseline="middle"
         textAnchor="middle"
-        color={textColor}
       >
         {text}
       </text>
@@ -54,7 +55,6 @@ const ProgressBar = ({
 ProgressBar.propTypes = {
   progress: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  textColor: PropTypes.string,
   size: PropTypes.number,
   strokeWidth: PropTypes.number,
   circleOneStroke: PropTypes.string,
