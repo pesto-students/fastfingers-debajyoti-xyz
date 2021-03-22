@@ -8,6 +8,7 @@ import "./Select.scss";
  * @typedef {Object} IProp
  * @property {(string) => void} onChange
  * @property {Array<{value: string, label: string}>} optionList
+ * @property {string?} defaultValue
  * @property {string?} name
  * @property {string?} placeholder
  */
@@ -18,7 +19,7 @@ import "./Select.scss";
  * @param {IProp} prop
  * @returns {React.ReactElement}
  */
-const Select = ({ onChange, optionList, name, placeholder }) => {
+const Select = ({ onChange, optionList, defaultValue, name, placeholder }) => {
   /**
    * @type {React.MutableRefObject<HTMLSelectElement>}
    */
@@ -40,6 +41,7 @@ const Select = ({ onChange, optionList, name, placeholder }) => {
       className="ff-select"
       name={name}
       placeholder={placeholder}
+      defaultValue={defaultValue}
       ref={$ref}
     >
       {optionList.map(({ value, label }) => (
@@ -59,6 +61,7 @@ Select.propTypes = {
       label: PropTypes.string,
     })
   ).isRequired,
+  defaultValue: PropTypes.string,
   name: PropTypes.string,
   placeholder: PropTypes.string,
 };

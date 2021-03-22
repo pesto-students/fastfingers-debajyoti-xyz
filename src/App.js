@@ -1,15 +1,26 @@
 // @ts-check
-import React from "react";
+import React, { useReducer } from "react";
 
-import "./App.scss";
+import appReducer, { hydrateState, withPeristance } from "./lib/appReducer";
 import useHistory from "./lib/useHistory";
+import AppContext, { defaultValue } from "./lib/AppContext";
+
+import WelcomePage from "./page/WelcomePage";
 import GamePage from "./page/GamePage";
 import PageNotFound from "./page/PageNotFound";
-import WelcomePage from "./page/WelcomePage";
 // import GamePage from "./page/GamePage";
+
+import "./App.scss";
+
+const enhancedReducer = withPeristance(appReducer);
 
 const App = () => {
   const [pathName, navigate] = useHistory();
+  const [appState, dispatch] = useReducer(
+    enhancedReducer,
+    defaultValue.state,
+    hydrateState
+  );
 
   let currentPage = null;
   switch (pathName) {
@@ -24,7 +35,11 @@ const App = () => {
     default:
       currentPage = <PageNotFound navigate={navigate} />;
   }
-  return <div className="App">{currentPage}</div>;
+  return (
+    <AppContext.Provider value={{ state: appState, dispatch }}>
+      <div className="App">{currentPage}</div>
+    </AppContext.Provider>
+  );
 };
 
 export default App;
