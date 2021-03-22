@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const ProgressBar = ({
+const CircularProgressBar = ({
   progress = 70,
   text = "",
   size = 200,
   strokeWidth = 8,
-  circleOneStroke = "#fff",
-  circleTwoStroke = "#ff5155",
   ...svgProps
 }) => {
   const center = size / 2;
@@ -17,10 +15,10 @@ const ProgressBar = ({
   const progressOffset = ((100 - progress) / 100) * circumference;
 
   return (
-    <svg className="progress" width={size} height={size} {...svgProps}>
+    <svg className="circular-progress" width={size} height={size} {...svgProps}>
       <circle
-        className="progress-circle-bg"
-        stroke={circleOneStroke}
+        className="bg-circle"
+        stroke={"#fff"}
         cx={center}
         cy={center}
         r={radius}
@@ -28,8 +26,8 @@ const ProgressBar = ({
         opacity="0.23"
       />
       <circle
-        className="progress-circle"
-        stroke={circleTwoStroke}
+        className="fg-circle"
+        stroke={"#ff5155"}
         cx={center}
         cy={center}
         r={radius}
@@ -40,7 +38,7 @@ const ProgressBar = ({
         strokeLinejoin="round"
       />
       <text
-        className="progress-circle-text"
+        className="text-center"
         x={center}
         y={center}
         dominantBaseline="middle"
@@ -52,13 +50,11 @@ const ProgressBar = ({
   );
 };
 
-ProgressBar.propTypes = {
+CircularProgressBar.propTypes = {
   progress: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   size: PropTypes.number,
   strokeWidth: PropTypes.number,
-  circleOneStroke: PropTypes.string,
-  circleTwoStroke: PropTypes.string
 };
 
-export default ProgressBar;
+export default CircularProgressBar;

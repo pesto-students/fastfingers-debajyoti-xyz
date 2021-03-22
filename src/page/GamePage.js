@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 import logoPlayer from "../asset/image/icon/material-person.svg";
 import logoGamepad from "../asset/image/icon/awesome-gamepad.svg";
 import logoCross from "../asset/image/icon/metro-cross.svg";
 
 import TimerCircle from "../component/TimerCircle";
+import WordDisplay from "../component/WordDisplay";
+import Input from "../component/Input";
 
-const GamePage = () => {
+const GamePage = ({navigate}) => {
   const totalTimeMs = 30000;
   const [remaningTime, setRemaningTime] = useState(totalTimeMs);
 
@@ -75,16 +78,16 @@ const GamePage = () => {
         </aside>
         <div className="game-board">
           <TimerCircle timeMs={remaningTime} totalTimeMs={totalTimeMs} />
-          <div className="word-view">
-            <span className="word-success">win</span>
-            <span class="word-error">do</span>w
-          </div>
-          <input className="game-input" type="text" />
+          <WordDisplay typedInput="winsew" word="window" />
+          <Input name="word-input" onChange={console.log} />
         </div>
         <footer></footer>
       </section>
     </div>
   );
+};
+GamePage.propTypes = {
+  navigate: PropTypes.func.isRequired,
 };
 
 export default GamePage;

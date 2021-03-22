@@ -71,31 +71,17 @@
     display: flex;
     flex-direction: column;
 
-    & + button {
-      margin-top: 60px;
-      background: transparent;
-      border: none;
-      color: $light-red;
-      text-transform: uppercase;
-      font-size: 38px;
-      transition: all 0.2s ease-in-out;
-    }
   }
-}
-
-input,
-select {
-  padding: 12px 16px;
-  border-radius: 12px;
-  box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.8);
-  opacity: 0.59;
-  outline: none;
-  color: $evergreen;
-  font-weight: 600;
-  font-size: 25px;
-}
-input {
-  margin-bottom: 15px;
+  
+  button {
+    margin-top: 40px;
+    background: transparent;
+    border: none;
+    color: $light-red;
+    text-transform: uppercase;
+    font-size: 38px;
+    transition: all 0.2s ease-in-out;
+  }
 }
 
 .btn {
@@ -215,22 +201,6 @@ input {
       flex-direction: column;
       align-items: center;
 
-      .word-view {
-        color: $white;
-        font-size: 58px;
-        text-transform: uppercase;
-
-        .word-success {
-          color: $light-green;
-        }
-        .word-error {
-          color: $color-text-error;
-        }
-      }
-
-      input {
-        width: var(--input-width);
-      }
     }
   }
 
@@ -245,17 +215,17 @@ input {
   }
 }
 
-.progress {
+.circular-progress {
   user-select: none;
   circle {
     fill: transparent;
   }
-  .progress-circle {
+  .fg-circle {
     transition: stroke-dashoffset 850ms ease-in-out;
   }
-}
-.progress-circle-text {
-  font-family: monospace;
-  font-size: 48px;
-  fill: #fff;
+  .text-center {
+    font-family: monospace;
+    font-size: 48px;
+    fill: #fff;
+  }
 }

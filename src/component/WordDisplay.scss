@@ -1,0 +1,14 @@
+@import "../theme.scss";
+
+.word-display {
+  color: $white;
+  font-size: 58px;
+  text-transform: uppercase;
+
+  .word-success {
+    color: $light-green;
+  }
+  .word-error {
+    color: $color-text-error;
+  }
+}

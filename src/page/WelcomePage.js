@@ -1,13 +1,20 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import logoKeyboard from "../asset/image/icon/awesome-keyboard.svg";
 import logoPlay from "../asset/image/icon/awesome-play.svg";
+import Input from "../component/Input";
+import Select from "../component/Select";
 
 export const LEVEL_EASY = "easy";
 export const LEVEL_MEDIUM = "medium";
 export const LEVEL_HARD = "hard";
 
-const WelcomePage = () => {
+const WelcomePage = ({ navigate }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/game");
+  };
   return (
     <div className="welcome-page centered">
       <header>
@@ -15,20 +22,33 @@ const WelcomePage = () => {
         <h1>fast fingers</h1>
         <span className="app-description">the ultimate typing game</span>
       </header>
-      <section className="parameters-input">
-        <input placeholder="TYPE YOUR NAME" />
-        <select>
-          <option value={LEVEL_EASY}>EASY</option>
-          <option value={LEVEL_MEDIUM}>MEDIUM</option>
-          <option value={LEVEL_HARD}>HARD</option>
-        </select>
-      </section>
-      <button className="btn btn-lg">
-          <img src={logoPlay} alt="" />
-          <span>Start Game</span>
-      </button>
+      <form onSubmit={handleSubmit}>
+        <section className="parameters-input">
+          <Input
+            onChange={console.log}
+            name="playerName"
+            placeholder="TYPE YOUR NAME"
+          />
+          <Select
+            name="gameLevel"
+            onChange={console.log}
+            optionList={[
+              { value: LEVEL_EASY, label: "EASY" },
+              { value: LEVEL_MEDIUM, label: "MEDIUM" },
+              { value: LEVEL_HARD, label: "HARD" },
+            ]}
+          />
+          <button className="btn btn-lg" type="submit">
+            <img src={logoPlay} alt="" />
+            <span>Start Game</span>
+          </button>
+        </section>
+      </form>
     </div>
   );
+};
+WelcomePage.propTypes = {
+  navigate: PropTypes.func.isRequired,
 };
 
 export default WelcomePage;
