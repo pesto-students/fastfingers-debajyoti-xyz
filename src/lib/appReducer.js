@@ -30,6 +30,7 @@ const appReducer = (state, action) => {
       } = action.payload;
       const { scoreList } = state;
       let maxTimeElaspedScore = null;
+      let bestScoreIndex = 0;
       let maxGameCount = 0;
       const N = scoreList.length;
       for (let i = 0; i < N; i++) {
@@ -39,6 +40,7 @@ const appReducer = (state, action) => {
         }
         if (score.timeElasped > maxTimeElaspedScore.timeElasped) {
           maxTimeElaspedScore = score;
+          bestScoreIndex = i;
         }
       }
       const currentScore = {
@@ -50,7 +52,7 @@ const appReducer = (state, action) => {
       };
       const newScoreList = scoreList.slice(0, Math.min(9, scoreList.length));
       newScoreList.push(currentScore);
-      return { ...state, scoreList: newScoreList };
+      return { ...state, scoreList: newScoreList, bestScoreIndex };
     }
     default:
       return state;

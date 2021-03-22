@@ -89,12 +89,10 @@
 
   button {
     margin-top: 40px;
-    background: transparent;
-    border: none;
-    color: $light-red;
-    text-transform: uppercase;
     font-size: 38px;
-    transition: all 0.2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -148,63 +146,6 @@
     display: flex;
     margin-left: 38px;
     position: relative;
-
-    .score-board {
-      border: 1px solid $light-red;
-      border-radius: 6px;
-      height: 60vh;
-      overflow-y: auto;
-
-      h3 {
-        color: $light-red;
-        font-size: 18px;
-        font-weight: 300;
-        text-align: center;
-        text-transform: uppercase;
-        margin: 12px 36px 18px;
-      }
-
-      ul {
-        list-style: none;
-        color: $white;
-        padding-left: 0;
-      }
-
-      li {
-        padding-left: 22px;
-        padding-bottom: 4px;
-        margin-bottom: 16px;
-        user-select: all;
-
-        &:hover {
-          box-shadow: 8px 5px 6px 0px rgba(255, 255, 255, 0.18);
-        }
-
-        .game-name {
-          display: inline-block;
-          margin-right: 4px;
-
-          &::after {
-            content: ":";
-          }
-        }
-
-        .game-score {
-          display: inline-block;
-          text-align: right;
-          min-width: 60px;
-        }
-
-        .is-personal-best {
-          display: block;
-          font-weight: 500;
-          color: $light-red;
-          font-size: small;
-          text-transform: uppercase;
-          text-decoration: wavy;
-        }
-      }
-    }
 
     .game-board {
       position: absolute;

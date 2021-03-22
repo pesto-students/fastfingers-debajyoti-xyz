@@ -25,6 +25,7 @@ import { noop } from "./misc";
  * @property {string} playerName
  * @property {constants.GameLevel} gameLevel
  * @property {Array<Score>} scoreList Stores top score & last 9 game's score
+ * @property {number} bestScoreIndex
  */
 
 /**
@@ -41,6 +42,7 @@ export const defaultValue = {
     playerName: "",
     gameLevel: constants.GameLevel.LEVEL_EASY,
     scoreList: [],
+    bestScoreIndex: 0
   },
   dispatch: noop,
 };

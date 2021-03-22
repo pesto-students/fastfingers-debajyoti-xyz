@@ -8,7 +8,7 @@ import AppContext from "../lib/AppContext";
 
 import logoKeyboard from "../asset/image/icon/awesome-keyboard.svg";
 import logoPlay from "../asset/image/icon/awesome-play.svg";
-import { setNameAndLevel } from "../lib/action";
+import { setGameLevel, setNameAndLevel } from "../lib/action";
 import { GameLevel } from "../lib/constant";
 
 const levelOptions = Object.keys(GameLevel).map((levelkey) => ({
@@ -24,11 +24,18 @@ const WelcomePage = ({ navigate }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {
-      playerName: { value: name },
-      gameLevel: { value: level },
-    } = e.currentTarget;
-    dispatch(setNameAndLevel(name.trim(), level));
+    if (playerName) {
+      const {
+        gameLevel: { value: level },
+      } = e.target;
+      dispatch(setGameLevel(level));
+    } else {
+      const {
+        playerName: { value: name },
+        gameLevel: { value: level },
+      } = e.target;
+      dispatch(setNameAndLevel(name.trim(), level));
+    }
     navigate("/game");
   };
 
