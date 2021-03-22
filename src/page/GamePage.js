@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import logoPlayer from "../asset/image/icon/material-person.svg";
-import logoGamepad from "../asset/image/icon/awesome-gamepad.svg";
 import logoCross from "../asset/image/icon/metro-cross.svg";
 
 import TimerCircle from "../component/TimerCircle";
@@ -10,15 +8,18 @@ import WordDisplay from "../component/WordDisplay";
 import Input from "../component/Input";
 import AppContext from "../lib/AppContext";
 import ScoreBoard from "../component/ScoreBoard";
+import Header from "../component/Header";
+import { formatScore } from "../lib/misc";
 
 const GamePage = ({ navigate }) => {
   const {
     state: { playerName, gameLevel, scoreList, bestScoreIndex },
-    dispatch,
   } = useContext(AppContext);
 
   const totalTimeMs = 30000;
   const [remaningTime, setRemaningTime] = useState(totalTimeMs);
+
+  const gameScore = formatScore(totalTimeMs - remaningTime);
 
   useEffect(() => {
     let timerInterval = null;
@@ -36,24 +37,11 @@ const GamePage = ({ navigate }) => {
 
   return (
     <div className="game-page">
-      <header>
-        <div className="game-info-left">
-          <div className="player-name">
-            <img src={logoPlayer} alt="" />
-            <span>{playerName}</span>
-          </div>
-          <div className="game-level">
-            <img src={logoGamepad} alt="" />
-            <span>LEVEL: {gameLevel.toUpperCase()}</span>
-          </div>
-        </div>
-        <div className="game-info-right">
-          <div className="game-name">fast fingers</div>
-          <div className="game-score-wrapper">
-            SCORE: <span className="game-score">00:30</span>
-          </div>
-        </div>
-      </header>
+      <Header
+        playerName={playerName}
+        gameLevel={gameLevel}
+        gameScore={gameScore}
+      />
       <section className="game-and-score">
         <aside>
           <ScoreBoard

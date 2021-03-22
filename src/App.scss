@@ -121,27 +121,6 @@
 }
 
 .game-page {
-  header {
-    display: flex;
-    justify-content: space-between;
-    color: $light-red;
-    font-size: 28px;
-    padding: 48px 38px;
-
-    img {
-      width: 34px;
-      margin-right: 16px;
-    }
-
-    .game-info-right {
-      text-align: right;
-      .game-score {
-        display: inline-block;
-        min-width: 120px;
-      }
-    }
-  }
-
   .game-and-score {
     display: flex;
     margin-left: 38px;
