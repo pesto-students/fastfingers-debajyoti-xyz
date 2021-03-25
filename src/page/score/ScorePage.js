@@ -16,6 +16,10 @@ const ScorePage = ({ navigate }) => {
     startGame(playerName, gameLevel);
   };
 
+  const handleQuit = () => {
+    navigate("/");
+  };
+
   useEffect(() => {
     if (scoreList.length === 0) {
       navigate("/");
@@ -37,14 +41,17 @@ const ScorePage = ({ navigate }) => {
       <div className="score-view">
         <h1>SCORE : GAME {gameCount}</h1>
         <div className="game-score">{formatScoreLowRes(timeElasped)}</div>
-        {isHighScore ? (
-          <div className="high-score">New High Score</div>
-        ) : null}
+        {isHighScore ? <div className="high-score">New High Score</div> : null}
         <button className="btn btn-md replay-btn" onClick={handleReplay}>
           <img src={replayIcon} alt="" />
           PLAY AGAIN
         </button>
       </div>
+      <footer>
+        <button className="btn btn-md quit-btn" onClick={handleQuit}>
+          QUIT
+        </button>
+      </footer>
     </div>
   );
 };

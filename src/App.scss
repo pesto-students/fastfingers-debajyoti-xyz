@@ -107,6 +107,7 @@
     text-align: right;
     text-decoration: wavy;
     color: $white-opacity;
+    margin-top: -20px;
   }
 
   button {
@@ -203,6 +204,11 @@
       max-height: 24px;
       margin-right: 12px;
     }
+  }
+  footer {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
   }
 }
 
