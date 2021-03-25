@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import ScoreItem from "./ScoreItem";
-import { formatScoreHighRes, isValidScore } from "../lib/misc";
+import { formatScoreHighRes } from "../lib/misc";
 
 import "./ScoreBoard.scss";
 import AppContext from "../lib/AppContext";
@@ -27,7 +27,7 @@ export const ScoreBoard = ({ scoreList, personalBestIndex }) => {
             key={score.gameCount}
             gameCount={score.gameCount}
             gameScore={formatScoreHighRes(score.timeElasped)}
-            isBestScore={isValidScore(score.timeElasped) && index === personalBestIndex}
+            isBestScore={index === personalBestIndex}
           />
         ))}
       </ul>
