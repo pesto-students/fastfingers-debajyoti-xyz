@@ -61,7 +61,7 @@ const appReducer = (state, action) => {
         maxTimeElaspedScore &&
         currentScore.timeElasped >= maxTimeElaspedScore.timeElasped
       ) {
-        bestScoreIndex = newScoreList.length;
+        bestScoreIndex = newScoreList.length - 1;
       }
       return { ...state, scoreList: newScoreList, bestScoreIndex };
     }
