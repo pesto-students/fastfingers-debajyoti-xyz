@@ -26,4 +26,4 @@ export const Action = {
   SET_NEXT_WORD_AND_TIME: "SET_NEXT_WORD_AND_TIME",
 };
 
-export const DIFFICULTY_FACTOR_INCREMENT = 0.1;
+export const DIFFICULTY_FACTOR_INCREMENT = 0.05;
