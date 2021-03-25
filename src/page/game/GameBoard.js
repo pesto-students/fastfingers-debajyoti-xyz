@@ -9,6 +9,7 @@ import WordDisplay from "../../component/WordDisplay";
 import Input from "../../component/Input";
 
 import * as action from "../../lib/action";
+
 import { getGameLevel } from "../../lib/misc";
 import {
   DifficultyFactorByLevel,
