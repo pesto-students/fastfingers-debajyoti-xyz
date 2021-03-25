@@ -91,7 +91,7 @@ const WelcomePage = () => {
           </div>
           {playerName ? (
             <a className="reset-data" href="#clear-data" onClick={handleReset}>
-              Not {playerName}? Click to clear data
+              Not {playerName}? Click to start afresh
             </a>
           ) : null}
           <button className="btn btn-lg" type="submit">
