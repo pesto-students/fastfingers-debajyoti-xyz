@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import CircularProgressBar from "./ProgressBar";
+import CircularProgressBar from "./CircularProgressBar";
 
-import { formatScore } from "../lib/misc";
+import { formatScoreHighRes } from "../lib/misc";
 
 function TimerCircle({ timeMs, totalTimeMs, size = 257.128, ...svgProps }) {
   return (
     <CircularProgressBar
       progress={(timeMs * 100) / totalTimeMs}
-      text={formatScore(timeMs)}
+      text={formatScoreHighRes(timeMs)}
       {...svgProps}
     />
   );

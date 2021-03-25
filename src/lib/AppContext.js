@@ -32,6 +32,9 @@ import { noop } from "./misc";
  * @typedef {Object} IAppContext
  * @property {IAppState} state
  * @property {<T>(action: IAction<T>) => any} dispatch
+ * @property {() => void} resetData
+ * @property {() => void} startGame
+ * @property {() => void} endGame
  */
 
 /**
@@ -42,12 +45,14 @@ export const defaultValue = {
     playerName: "",
     gameLevel: constants.GameLevel.LEVEL_EASY,
     scoreList: [],
-    bestScoreIndex: 0
+    bestScoreIndex: 0,
   },
   dispatch: noop,
+  resetData: noop,
+  startGame: noop,
+  endGame: noop,
 };
 
 const AppContext = createContext(defaultValue);
-
 
 export default AppContext;

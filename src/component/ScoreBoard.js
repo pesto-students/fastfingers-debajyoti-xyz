@@ -1,10 +1,11 @@
 // @ts-check
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import ScoreItem from "./ScoreItem";
-import { formatScore } from "../lib/misc";
+import { formatScoreHighRes, isValidScore } from "../lib/misc";
 
 import "./ScoreBoard.scss";
+import AppContext from "../lib/AppContext";
 
 /**
  * @typedef {Object} IProp
@@ -16,7 +17,7 @@ import "./ScoreBoard.scss";
  * @param {IProp} props
  * @returns
  */
-const ScoreBoard = ({ scoreList, personalBestIndex }) => {
+export const ScoreBoard = ({ scoreList, personalBestIndex }) => {
   return (
     <div className="score-board">
       <h3>Score board</h3>
@@ -25,8 +26,8 @@ const ScoreBoard = ({ scoreList, personalBestIndex }) => {
           <ScoreItem
             key={score.gameCount}
             gameCount={score.gameCount}
-            gameScore={formatScore(score.timeElasped)}
-            isBestScore={index === personalBestIndex}
+            gameScore={formatScoreHighRes(score.timeElasped)}
+            isBestScore={isValidScore(score.timeElasped) && index === personalBestIndex}
           />
         ))}
       </ul>
@@ -47,4 +48,13 @@ ScoreBoard.propTypes = {
   personalBestIndex: PropTypes.number.isRequired,
 };
 
-export default ScoreBoard;
+const ScoreBoardContainer = () => {
+  const {
+    state: { scoreList, bestScoreIndex },
+  } = useContext(AppContext);
+  return (
+    <ScoreBoard scoreList={scoreList} personalBestIndex={bestScoreIndex} />
+  );
+};
+
+export default ScoreBoardContainer;

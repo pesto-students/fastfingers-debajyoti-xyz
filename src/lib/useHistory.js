@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from "react";
  * @returns {[string, (path: string) => void]}
  */
 const useHistory = () => {
-  console.log("window.location.pathname = ", window.location.pathname);
   const [pathName, setPathName] = useState(window.location.pathname);
 
   const navigate = useCallback(
@@ -22,7 +21,7 @@ const useHistory = () => {
   );
 
   useEffect(() => {
-    console.log("Adding popstate event listener");
+    console.info("Adding popstate event listener");
     const handlePopState = () => {
       setPathName(window.location.pathname);
     };

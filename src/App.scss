@@ -84,11 +84,33 @@
     .welcome-msg {
       color: $light-red;
       font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .player-name,
+    .game-level {
+      .field-error {
+        color: $light-red;
+        min-height: 32px;
+        width: 100%;
+      }
+
+      input,
+      select {
+        width: 100%;
+      }
     }
   }
 
+  .reset-data {
+    display: block;
+    text-align: right;
+    text-decoration: wavy;
+    color: $white-opacity;
+  }
+
   button {
-    margin-top: 40px;
+    margin-top: 10px;
     font-size: 38px;
     display: flex;
     justify-content: center;
@@ -148,13 +170,46 @@
   }
 }
 
+.score-page {
+  .score-view {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5vh;
+
+    color: rgba(222, 222, 222, 0.85);
+
+    h1 {
+      font-size: 54px;
+      line-height: 70px;
+      font-weight: 300;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .game-score {
+      font-size: 64px;
+    }
+    .high-score {
+      font-size: 48px;
+      font-weight: 300;
+    }
+  }
+
+  .replay-btn {
+    margin-top: 28px;
+    font-weight: 600;
+    img {
+      max-height: 24px;
+      margin-right: 12px;
+    }
+  }
+}
+
 .circular-progress {
   user-select: none;
   circle {
     fill: transparent;
-  }
-  .fg-circle {
-    transition: stroke-dashoffset 850ms ease-in-out;
   }
   .text-center {
     font-family: monospace;

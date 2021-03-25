@@ -1,6 +1,5 @@
 // @ts-check
 
-/* eslint-disable-next-line no-unused-vars */
 import * as appContext from "./AppContext";
 
 /**
@@ -11,6 +10,9 @@ import * as appContext from "./AppContext";
  */
 const appReducer = (state, action) => {
   switch (action.type) {
+    case "RESET_APP_STATE": {
+      return { ...appContext.defaultValue.state };
+    }
     case "SET_USER_NAME": {
       return { ...state, playerName: action.payload };
     }
@@ -38,7 +40,9 @@ const appReducer = (state, action) => {
         if (score.gameCount > maxGameCount) {
           maxGameCount = score.gameCount;
         }
-        if (score.timeElasped > maxTimeElaspedScore.timeElasped) {
+        if (maxTimeElaspedScore === null) {
+          maxTimeElaspedScore = score;
+        } else if (score.timeElasped > maxTimeElaspedScore.timeElasped) {
           maxTimeElaspedScore = score;
           bestScoreIndex = i;
         }
@@ -52,6 +56,13 @@ const appReducer = (state, action) => {
       };
       const newScoreList = scoreList.slice(0, Math.min(9, scoreList.length));
       newScoreList.push(currentScore);
+
+      if (
+        maxTimeElaspedScore &&
+        currentScore.timeElasped >= maxTimeElaspedScore.timeElasped
+      ) {
+        bestScoreIndex = newScoreList.length;
+      }
       return { ...state, scoreList: newScoreList, bestScoreIndex };
     }
     default:

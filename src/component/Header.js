@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 
-import "./Header.scss";
+import AppContext from "../lib/AppContext";
+import LiveGameContext from "../lib/LiveGameContext";
+import TimerContext from "../lib/TimerContext";
+import { formatScoreLowRes } from "../lib/misc";
+
 import logoPlayer from "../asset/image/icon/material-person.svg";
 import logoGamepad from "../asset/image/icon/awesome-gamepad.svg";
 
-const Header = ({ playerName, gameLevel, gameScore }) => {
+import "./Header.scss";
+
+export const Header = ({ playerName, gameLevel, gameScore, hideScore }) => {
   return (
     <header className="game-header">
       <div className="game-info-left">
@@ -20,9 +26,11 @@ const Header = ({ playerName, gameLevel, gameScore }) => {
       </div>
       <div className="game-info-right">
         <div className="game-name">fast fingers</div>
-        <div className="game-score-wrapper">
-          SCORE: <span className="game-score">{gameScore}</span>
-        </div>
+        {hideScore ? null : (
+          <div className="game-score-wrapper">
+            SCORE: <span className="game-score">{gameScore}</span>
+          </div>
+        )}
       </div>
     </header>
   );
@@ -34,4 +42,27 @@ Header.propTypes = {
   gameScore: PropTypes.string.isRequired,
 };
 
-export default Header;
+const HeaderContainer = ({ hideScore = false }) => {
+  const {
+    state: { playerName, gameLevel },
+  } = useContext(AppContext);
+  const {
+    state: { gameStartTime },
+  } = useContext(LiveGameContext);
+  const { lastTimestamp } = useContext(TimerContext);
+
+  const gameScore = formatScoreLowRes(
+    Math.max(lastTimestamp - gameStartTime, 0)
+  );
+
+  return (
+    <Header
+      playerName={playerName}
+      gameLevel={gameLevel}
+      gameScore={gameScore}
+      hideScore={hideScore}
+    />
+  );
+};
+
+export default HeaderContainer;

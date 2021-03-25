@@ -1,12 +1,15 @@
-// @ts-check
-import React, { useEffect, useRef } from "react";
+// @ts-nocheck
+// TODO: troubleshoot why ts-check is not working with forwardRef
+// Simmilar to ./Input
+import React, { forwardRef, useCallback } from "react";
 import PropTypes from "prop-types";
 
 import "./Select.scss";
 
 /**
  * @typedef {Object} IProp
- * @property {(string) => void} onChange
+ * @property {string?} value
+ * @property {((string) => void)?} onChange
  * @property {Array<{value: string, label: string}>} optionList
  * @property {string?} defaultValue
  * @property {string?} name
@@ -14,47 +17,48 @@ import "./Select.scss";
  */
 
 /**
- * A subscribe only uncontrolled select component styled using css
- * i.e. we cannot set the select but can subscribe to change event
+ * Styled input with simplified onChange which transforms values to lowercase
+ * but displayed in uppercase using css-transform
  * @param {IProp} prop
  * @returns {React.ReactElement}
  */
-const Select = ({ onChange, optionList, defaultValue, name, placeholder }) => {
-  /**
-   * @type {React.MutableRefObject<HTMLSelectElement>}
-   */
-  const $ref = useRef();
+const Select = forwardRef(
+  ({ value, onChange, optionList, defaultValue, name, placeholder }, ref) => {
+    const handleChange = useCallback(
+      (evt) => {
+        if (onChange) {
+          const value = evt.target.value;
+          const transformedValue = value ? value.toLowerCase() : value;
+          onChange(transformedValue);
+        }
+      },
+      [onChange]
+    );
 
-  useEffect(() => {
-    const handleChange = (evt) => {
-      onChange(evt.target.value);
-    };
-    const $select = $ref.current;
-    $select.addEventListener("change", handleChange);
-    return () => {
-      $select.removeEventListener("change", handleChange);
-    };
-  }, [onChange]);
-
-  return (
-    <select
-      className="ff-select"
-      name={name}
-      placeholder={placeholder}
-      defaultValue={defaultValue}
-      ref={$ref}
-    >
-      {optionList.map(({ value, label }) => (
-        <option key={value} value={value}>
-          {label}
-        </option>
-      ))}
-    </select>
-  );
-};
+    return (
+      <select
+        className="ff-select"
+        name={name}
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        value={value}
+        onChange={onChange ? handleChange : undefined}
+        autoComplete="off"
+        ref={ref}
+      >
+        {optionList.map(({ value, label }) => (
+          <option key={value} value={value}>
+            {label}
+          </option>
+        ))}
+      </select>
+    );
+  }
+);
 
 Select.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   optionList: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string,

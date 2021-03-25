@@ -1,51 +1,54 @@
-// @ts-check
-import React, { useEffect, useRef } from "react";
+// @ts-nocheck
+// TODO: troubleshoot why ts-check is not working with forwardRef
+// How do we specify IProps to forwardRef's type vars
+import React, { forwardRef, useCallback } from "react";
 import PropTypes from "prop-types";
 
 import "./Input.scss";
 
 /**
  * @typedef {Object} IProp
- * @property {(string) => void} onChange
+ * @property {string?} value
+ * @property {((string) => void)?} onChange
  * @property {string?} name
  * @property {string?} placeholder
  */
 
 /**
- * A subscribe only uncontrolled input component styled using css
- * i.e. we cannot set the input but can subscribe to change event
+ * Styled input with simplified onChange which transforms values to lowercase
+ * but displayed in uppercase using css-transform
  * @param {IProp} prop
  * @returns {React.ReactElement}
  */
-const Input = ({ onChange, name, placeholder }) => {
-  /**
-   * @type {React.MutableRefObject<HTMLInputElement>}
-   */
-  const $ref = useRef();
-
-  useEffect(() => {
-    const handleChange = (evt) => {
-      onChange(evt.target.value);
-    };
-    const $input = $ref.current;
-    $input.addEventListener("change", handleChange);
-    return () => {
-      $input.removeEventListener("change", handleChange);
-    };
-  }, [onChange]);
+const Input = forwardRef(({ value, onChange, name, placeholder, autoFocus = false }, ref) => {
+  const handleChange = useCallback(
+    (evt) => {
+      if (onChange) {
+        const value = evt.target.value;
+        const transformedValue = value ? value.toLowerCase() : value;
+        onChange(transformedValue);
+      }
+    },
+    [onChange]
+  );
 
   return (
     <input
       className="ff-input"
       name={name}
       placeholder={placeholder}
-      ref={$ref}
+      value={value}
+      onChange={onChange ? handleChange : undefined}
+      autoFocus={autoFocus}
+      autoComplete="off"
+      ref={ref}
     />
   );
-};
+});
 
 Input.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
   name: PropTypes.string,
   placeholder: PropTypes.string,
 };
