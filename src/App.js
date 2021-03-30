@@ -21,6 +21,7 @@ import {
   logGameStart,
   setNameAndLevel,
   resetAppState,
+  syncDifficultyFactor,
 } from "./lib/action";
 
 import WelcomePage from "./page/WelcomePage";
@@ -79,8 +80,10 @@ const App = () => {
 
   const startGame = useCallback(
     (name, level) => {
-      appDispatch(setNameAndLevel(name, level));
+      const action = setNameAndLevel(name, level);
+      appDispatch(action);
       liveGameDispatch(logGameStart());
+      liveGameDispatch(syncDifficultyFactor(level));
       setTimeout(() => {
         navigate("/game");
       }, 0);

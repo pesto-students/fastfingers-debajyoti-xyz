@@ -9,6 +9,7 @@ import * as appContext from "./AppContext";
  * @return {appContext.IAppState}
  */
 const appReducer = (state, action) => {
+  debugger;
   switch (action.type) {
     case "RESET_APP_STATE": {
       return { ...appContext.defaultValue.state };

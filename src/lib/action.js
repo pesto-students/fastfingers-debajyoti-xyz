@@ -31,6 +31,16 @@ export const setNameAndLevel = (name, level) => ({
 
 /**
  *
+ * @param {GameLevel} level
+ * @returns {import("./AppContext").IAction<GameLevel>}
+ */
+export const syncDifficultyFactor = (level) => ({
+  type: Action.SYNC_DIFFICULTY_FACTORY,
+  payload: level,
+});
+
+/**
+ *
  * @returns {import("./AppContext").IAction<any>}
  */
 export const resetAppState = () => {
