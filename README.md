@@ -1,5 +1,7 @@
 # Fast Fingers
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6c371365-e76b-46eb-9674-1394a76994f2/deploy-status)](https://app.netlify.com/sites/fastfingers-c99196/deploys)
+
 Pesto Tech is proudly launching its own speed typing game named **Fast fingers**. You have been awarded with the project and you need to design and develop this project which should
 meet the requirements mentioned in the MVP below.
 
@@ -49,7 +51,6 @@ Difficulty factor for hard level: 2
 14. Application UI should closely match with the provided UI design mocks.
 
 **Note: Please deploy your application to Netlify(no other platforms allowed at this point) and Add your Application link to website section in About field**
-![](public/about.png)
 
 ## Additional Requirement
 
